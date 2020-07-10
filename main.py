@@ -6,7 +6,7 @@ import pickle
 
 from chunks import chunks
 
-class MyFirstGUI:
+class MainGUI:
     def __init__(self, master, weekdata):
         self.master = master
         master.title("Smartplate")
@@ -85,6 +85,6 @@ if __name__ == "__main__":
 
     # Set up GUI
     root = Tk()
-    my_gui = MyFirstGUI(root, weekdata)
+    my_gui = MainGUI(root, weekdata)
     root.mainloop()
         
