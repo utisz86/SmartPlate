@@ -15,28 +15,28 @@ class MyFirstGUI:
         )
 
         # Week days
-        for (i, day) in enumerate(["{1}: {0} week".format(weekdata.weekNumber, weekdata.weekyear)]+["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]+["Min", "Max"]):
+        for (i, day) in enumerate(["{1}: {0} week".format(weekdata.weekNumber, weekdata.weekyear)]+weekdata.weekDays+["Min", "Max"]):
             self.label = Label(master=master, text=day)
             self.label.grid(row=0, column=i)
 
         # FoodEvents
-        for (j, event) in enumerate(["Zöldség", "Gyümölcs", "Gabona", "Hús", "Friss hal","Belsöség", "Édesség", "Magvak", "Üditő", "Sport", "Súly"]):
+        for (j, event) in enumerate(weekdata.foodEvents):
             self.label = Label(master=master, text=event)
             self.label.grid(row=j+1, column=0)
 
         # Spinboxes
-        for (j, event) in enumerate(["Zöldség", "Gyümölcs", "Gabona", "Hús", "Friss hal","Belsöség", "Édesség", "Magvak", "Üditő", "Sport", "Súly"]):
-            for (i, day) in enumerate(["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]):
+        for (j, event) in enumerate(weekdata.foodEvents):
+            for (i, day) in enumerate(weekdata.weekDays):
                 self.spinbox = Spinbox(master, from_=0, to=10, width=5)
                 self.spinbox.grid(row=j+1, column=i+1)
                 
         # Min-Max value
-        for (j, event) in enumerate(["Zöldség", "Gyümölcs", "Gabona", "Hús", "Friss hal","Belsöség", "Édesség", "Magvak", "Üditő", "Sport", "Súly"]):
+        for (j, event) in enumerate(weekdata.foodEvents):
             self.label = Label(master=master, text=0)
-            self.label.grid(row=j+1, column=8)
+            self.label.grid(row=j+1, column=len(weekdata.weekDays)+1)
 
             self.label = Label(master=master, text=0)
-            self.label.grid(row=j+1, column=9)
+            self.label.grid(row=j+1, column=len(weekdata.weekDays)+2)
 
 if __name__ == "__main__":
     # This week data
