@@ -27,7 +27,8 @@ class MyFirstGUI:
         # Spinboxes
         for (j, event) in enumerate(weekdata.foodEvents):
             for (i, day) in enumerate(weekdata.weekDays):
-                self.spinbox = Spinbox(master, from_=0, to=10, width=5)
+                # Spinbox default value
+                self.spinbox = Spinbox(master, from_=weekdata.data[j][i], to=10, width=5)
                 self.spinbox.grid(row=j+1, column=i+1)
                 
         # Min-Max value
