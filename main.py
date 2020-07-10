@@ -59,6 +59,28 @@ class MainGUI:
         with open("week"+str(year)+str(week_num)+"_data.pkl", 'wb') as output:
             pickle.dump(weekdata, output, pickle.HIGHEST_PROTOCOL)
 
+        # Refress week Min_Max colour
+        for (j, food) in enumerate(weekdata.foodEvents):
+            # Sum up all data es 
+            sum_event = sum(int(i) for i in weekdata.data[j])            
+            # compare min and max, 
+            # if exceed change the color
+            if sum_event >= weekdata.weekMin[j] and sum_event <= weekdata.weekMax[j]:
+                self.label = Label(master=self.master, text=weekdata.weekMin[j], background="lightgreen")
+                self.label.grid(row=j+1, column=len(weekdata.weekDays)+1)
+
+                self.label = Label(master=self.master, text=weekdata.weekMax[j],
+                background="lightgreen")
+                self.label.grid(row=j+1, column=len(weekdata.weekDays)+2)
+            else:
+                self.label = Label(master=self.master, text=weekdata.weekMin[j], background="red")
+                self.label.grid(row=j+1, column=len(weekdata.weekDays)+1)
+
+                self.label = Label(master=self.master, text=weekdata.weekMax[j],
+                background="red")
+                self.label.grid(row=j+1, column=len(weekdata.weekDays)+2)
+
+
         
            
 
