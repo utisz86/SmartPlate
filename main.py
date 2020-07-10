@@ -1,7 +1,11 @@
 from tkinter import Tk, Label, Button, Frame, RAISED, Spinbox
+from WeekClass import WeekClass
+
+import datetime
+import pickle
 
 class MyFirstGUI:
-    def __init__(self, master):
+    def __init__(self, master, weekdata):
         self.master = master
         master.title("Smartplate")
 
@@ -11,7 +15,7 @@ class MyFirstGUI:
         )
 
         # Week days
-        for (i, day) in enumerate(["{1}: {0} week".format(1, 2020)]+["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]+["Min", "Max"]):
+        for (i, day) in enumerate(["{1}: {0} week".format(weekdata.weekNumber, weekdata.weekyear)]+["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]+["Min", "Max"]):
             self.label = Label(master=master, text=day)
             self.label.grid(row=0, column=i)
 
@@ -35,7 +39,26 @@ class MyFirstGUI:
             self.label.grid(row=j+1, column=9)
 
 if __name__ == "__main__":
+    # This week data
+    my_date = datetime.date.today()
+    year, week_num, day_of_week = my_date.isocalendar()
+
+    # Set up data
+    # Check is there data for this week
+    # if yes: open the file
+    try:
+        with open("week"+str(year)+str(week_num)+"_data.pkl", "rb") as input:
+            weekdata = pickle.load(input)
+    # if no: new class and save
+    except:
+        # Make new data object for the week data
+        weekdata = WeekClass()
+        # Save this weekdata object to a pickle file
+        with open("week"+str(year)+str(week_num)+"_data.pkl", 'wb') as output:
+            pickle.dump(weekdata, output, pickle.HIGHEST_PROTOCOL)
+
+    # Set up GUI
     root = Tk()
-    my_gui = MyFirstGUI(root)
+    my_gui = MyFirstGUI(root, weekdata)
     root.mainloop()
         
