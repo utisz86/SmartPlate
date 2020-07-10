@@ -29,11 +29,12 @@ class MainGUI:
             self.label.grid(row=j+1, column=0)
 
         # Min-Max value
-        for (j, event) in enumerate(weekdata.foodEvents):
-            self.label = Label(master=master, text=0)
+        for (j, weekMin) in enumerate(weekdata.weekMin):
+            self.label = Label(master=master, text=weekMin)
             self.label.grid(row=j+1, column=len(weekdata.weekDays)+1)
-
-            self.label = Label(master=master, text=0)
+        
+        for (j, weekMax) in enumerate(weekdata.weekMax):
+            self.label = Label(master=master, text=weekMax)
             self.label.grid(row=j+1, column=len(weekdata.weekDays)+2)
 
         # Spinboxes
