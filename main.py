@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Frame, RAISED, Spinbox, DoubleVar
+from tkinter import Tk, Label, Button, Frame, RAISED, Spinbox, DoubleVar, Toplevel
 from WeekClass import WeekClass
 
 import datetime
@@ -48,7 +48,19 @@ class MainGUI:
 
         # Spinboxes colering
         self.spinbox_minmax()
-    
+
+        # Info button
+        self.infobutton = Button(text="{1}: {0} week".format(weekdata.weekNumber, weekdata.weekyear), command=self.createNewWindow)
+        self.infobutton.grid(row=0, column=0)
+    # Info button 
+    def createNewWindow(self):
+        newWindow = Toplevel(self.master)
+        for (i, info) in enumerate(weekdata.foodInfo):
+            lableInfo = Label(newWindow, text = info, wraplength=250, anchor='w', borderwidth=2, relief="solid")
+            lableInfo.grid(row=i)
+
+
+
     # Comand function when spinbox change
     # If spinbox change, read the new data and input into weekdata
     def spinCallBack(self):
