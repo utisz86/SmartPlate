@@ -45,8 +45,10 @@ class MainGUI:
                 self.spinbox = Spinbox(master, from_=0, to=10, width=5, command = self.spinCallBack, textvariable=var)
                 self.spinbox.grid(row=j+1, column=i+1)
                 self.spinboxs.append(self.spinbox)
-                
 
+        # Spinboxes colering
+        self.spinbox_minmax()
+    
     # Comand function when spinbox change
     # If spinbox change, read the new data and input into weekdata
     def spinCallBack(self):
@@ -59,6 +61,12 @@ class MainGUI:
         with open("week"+str(year)+str(week_num)+"_data.pkl", 'wb') as output:
             pickle.dump(weekdata, output, pickle.HIGHEST_PROTOCOL)
 
+        # Refress week Min_Max colour
+        # Refress spinbox bg colour
+        self.spinbox_minmax()
+
+                    
+    def spinbox_minmax(self):
         # Refress week Min_Max colour
         for (j, food) in enumerate(weekdata.foodEvents):
             # Sum up all data es 
@@ -93,16 +101,8 @@ class MainGUI:
                 
                 if i == j:
                     index_max += 1
-                    j += 7
-                    
-                
+                    j += 7        
 
-
-        
-           
-
-
-        
 
 if __name__ == "__main__":
     # This week data
