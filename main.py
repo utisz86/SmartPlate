@@ -80,6 +80,23 @@ class MainGUI:
                 background="red")
                 self.label.grid(row=j+1, column=len(weekdata.weekDays)+2)
 
+            # Refress spinbox bg colour
+            # Check if day value larger dan daily max
+            # if yes, change colour
+            index_max = 0
+            j = 6
+            for (i, spinbox) in enumerate(self.spinboxs):
+                if int(spinbox.get()) > weekdata.dayMax[index_max]:
+                    spinbox.config(bg="red")
+                else:
+                    spinbox.config(bg="lightgreen")
+                
+                if i == j:
+                    index_max += 1
+                    j += 7
+                    
+                
+
 
         
            
